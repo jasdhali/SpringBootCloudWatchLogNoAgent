@@ -1,0 +1,24 @@
+<configuration>
+	<appender name="Console"
+		class="ch.qos.logback.core.ConsoleAppender">
+		<layout class="ch.qos.logback.classic.PatternLayout">
+			<!--<Pattern>QA
+                %black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable
+            </Pattern>-->
+			<pattern>
+				%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n
+			</pattern>
+		</layout>
+	</appender>
+	<appender name="CLOUDWATCH"
+		class="com.aws.clouwatcghlogs.appenders.CloudWatchAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>INFO</level>
+		</filter>
+	</appender>
+
+	<root level="info">
+		<appender-ref ref="CLOUDWATCH" />
+		<appender-ref ref="Console" />
+	</root>
+</configuration>
